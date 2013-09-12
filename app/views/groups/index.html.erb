@@ -1,0 +1,15 @@
+<% @groups.each do |group| %>
+	<div class="group_index">
+		<a class="group_link" href="<%= group_url(group) %>"><%= group.name %></a>
+		<span>
+			<%= group.description %>
+		</span>
+		<br>
+			<% group.users.each do |user| %>
+				<img class="index_thumb" title="<%= user.name %>" src="<%= user.profile_image_url %>"></img>
+			<% end %>
+		
+	</div>
+<% end %>
+
+	

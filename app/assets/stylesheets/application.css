@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+ body {
+ 	width: 80%;
+ 	padding-left: 10%;
+ }
+ .search_result:hover {
+ 	background: #CCCC99;
+ }
+ span.xxx {
+ 	color: green;
+ 	font-size: 66px;
+ }
+ .group_link {
+ 	text-decoration: none;
+ 	font-size: 4em;
+ }
+ .group_link:hover {
+ 	text-decoration: underline;
+ }
+ .group_link:visited {
+ 	color: #CCCC99;
+ }
+ .group_name {
+ 	font-size: 4em;
+ }
+ .group_description {
+
+ }
+ .group_label {
+ 	color: #CCCC99;
+ 	vertical-align: top;
+ }
+ .group_index {
+ 	border-left: 5px black solid;
+ 	border-right: 5px black solid;
+ 	margin-bottom: 10px;
+ 	padding-left: 20px;
+ }
+ .index_thumb {
+ 	padding: 5px;
+ }
+ .index_thumb:hover {
+ 	background-color: #CCCC99;
+ 	cursor: pointer;
+ }
+ .show_page_edit_button {
+ 	padding: 15px;
+ }
+ .enter_group_name {
+ 	font-size: 1.2em;
+ }
+ #group_form_labels {
+ 	padding-right: 20px;
+ 	vertical-align: top;
+ }
+ #group_form_input {
+ }
+ #group_form_labels {
+ 	float: left;
+ }
+ .group_form {
+ 	padding: 20px;
+ 	margin: 10px;
+ 	border: 2px solid #CCCC99;
+ 	border-bottom-right-radius: 20px 20px;
+ 	border-bottom-left-radius: 20px 20px;
+ 	border-top-right-radius: 20px 20px;
+ 	border-top-left-radius: 20px 20px;
+ }

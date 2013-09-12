@@ -1,0 +1,34 @@
+<% @group = Group.find(params[:id]) %>
+<div class="show_page_edit_button">
+	<a href="<%= edit_group_url %>">edit this group</a>
+</div>
+<br>
+<span class="group_label">group name</span>
+<span class="group_name"><%= @group.name %></span>
+<span class="group_label">description</span>
+<span class="group_description"><%= @group.description %></span>
+<br>
+
+<span class="enter_group_name">Click to view a user's tweets</span>
+<div class="group_form">
+	<div id="group_members"></div>
+	<div id="tweets"></div>
+</div>
+
+<% @users = @group.users %>
+<% @users.each do |user| %>
+	<script type="text/javascript">
+		$( function () {
+			var user_json = <%= user.to_json.html_safe %>;
+			user_json['id_str'] = user_json['twitter_id_str'];
+			$("#group_members").append(template(user_json));
+			$("#<%= user.twitter_id_str %>").val(user_json);
+			<% p @tweets.length %>
+			<% p @tweets[0].length %>
+			<% @tweets[0].each do |tweet| %>
+				var tweet_json = <%= tweet.to_json.html_safe %>
+				$("#tweets").append(tweet_template(tweet_json));
+			<% end %>
+		})
+	</script>
+<% end %>

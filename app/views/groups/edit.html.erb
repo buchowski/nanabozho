@@ -1,0 +1,20 @@
+<form action="<%= group_url %>" method="POST">
+	<input type="hidden" name="_method" value="PUT"></input>
+	<%= render 'group_form' %>
+</form>
+
+<%= render 'search_form' %>
+<div id="users"></div>
+
+<script type="text/javascript">
+	$(function () {
+		<% @users.each do |user| %>
+			$("#search_results").append(template(<%= {
+				profile_image_url: user.profile_image_url, 
+				name: user.name, 
+				id_str: user.twitter_id_str 
+			}.to_json.html_safe %>));
+			$("#<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
+		<% end %>
+	})
+</script>

@@ -1,0 +1,9 @@
+<form action="<%= groups_url %>" method="POST">
+	<%= render 'group_form' %>
+</form>
+
+<span class="enter_group_name">Search for your group's Twitterers</span>
+	<div class="group_form">
+	<%= render 'search_form' %>
+	<div id="users"></div>
+</div>

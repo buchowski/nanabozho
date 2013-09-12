@@ -1,0 +1,11 @@
+<form action="<%= groups_url %>" method="POST">
+	<input type="submit" value="Add Selected Users to Group"></input>
+
+	<% @users.each_with_index do |user, i| %>
+	<!-- :description, :name, :profile_image_url, :twitter_id_str -->
+		<img src="<%= user['profile_image_url'] %>">
+		<h3><%= "#{user['name']} #{user['location']}" %></h3>
+		<input type="checkbox" name="user[<%= i %>]" value="<%= user.to_json %>"></input>
+	<% end %>
+
+</form>

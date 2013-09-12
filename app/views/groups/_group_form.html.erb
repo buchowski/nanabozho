@@ -1,0 +1,22 @@
+<span class="enter_group_name">Enter the name and description of your group</span>
+<br>
+<div class="group_form">
+	<div id="group_form_labels">
+		<label for="group_name">Name:</label>
+		<br>
+		<label for="group_description">Description:</label>
+	</div>
+	<div id="group_form_input">
+		<input type="text" name="group[name]" id="group_name" value="<%= @group.name %>"></input>
+		<br>
+		<textarea name="group[description]" id="group_description">
+			<%= @group.description %>
+		</textarea>
+	</div>
+	<br>
+	<input type="submit" value="Submit"></input>
+	<br>
+	<!-- users are added to the div below so they're submitted on POST -->
+	<div id="search_results"></div>
+</div>
+
