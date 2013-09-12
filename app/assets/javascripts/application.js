@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require ejs_0.9_alpha_1_production
+//= require jquery.ui.accordion
 //= require nanabozho
 //= require_tree .

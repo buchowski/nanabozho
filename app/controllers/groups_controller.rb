@@ -14,14 +14,15 @@ class GroupsController < ApplicationController
         ENV['ACCESS_TOKEN'],
         ENV['ACCESS_TOKEN_SECRET'])
 
-    @tweets = []
+    @tweets = {}
 
     @users.each do |user|
+      @tweets[user.id] = [] unless @tweets[user.id]
+
       baseurl = "https://api.twitter.com"
       path    = "/1.1/statuses/user_timeline.json"
-      query   = URI.encode_www_form("user_id" => user.twitter_id_str, "count" => 12) # "exclude_replies", "trim_user" => true
+      query   = URI.encode_www_form("user_id" => user.twitter_id_str, "count" => 12) 
       address = URI("#{baseurl}#{path}?#{query}") 
-      p address
 
       request = Net::HTTP::Get.new address.request_uri
 
@@ -32,14 +33,13 @@ class GroupsController < ApplicationController
       request.oauth! http, consumer_key, access_token
       http.start
       response = http.request request
-      p response.code
+      
       if response.code == '200' 
         temp = JSON.parse(response.body)
-        p "#{user.name}'s tweets: #{temp}"
-        @tweets << temp
+        @tweets[user.id] << temp
       end
     end
-
+    #render :json => @tweets
     render :show
   end
 

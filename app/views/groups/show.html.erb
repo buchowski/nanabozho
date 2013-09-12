@@ -11,24 +11,35 @@
 
 <span class="enter_group_name">Click to view a user's tweets</span>
 <div class="group_form">
-	<div id="group_members"></div>
-	<div id="tweets"></div>
+	<div id="accordion"></div>
 </div>
 
 <% @users = @group.users %>
-<% @users.each do |user| %>
-	<script type="text/javascript">
-		$( function () {
+
+<script type="text/javascript">
+	$( function () {
+		var tweets = <%= @tweets.to_json.html_safe %>;
+		<% @users.each do |user| %>
 			var user_json = <%= user.to_json.html_safe %>;
-			user_json['id_str'] = user_json['twitter_id_str'];
-			$("#group_members").append(template(user_json));
-			$("#<%= user.twitter_id_str %>").val(user_json);
-			<% p @tweets.length %>
-			<% p @tweets[0].length %>
-			<% @tweets[0].each do |tweet| %>
-				var tweet_json = <%= tweet.to_json.html_safe %>
-				$("#tweets").append(tweet_template(tweet_json));
+			$("#accordion").append(show_template(user_json));
+
+			<% if @tweets[user.id].empty? %>
+				$("#<%= user.twitter_id_str %>").append("<h1>Protected</h1>");
+			<% else %>
+				<% @tweets[user.id][0].each do |tweet| %>
+					tweet = <%= tweet.to_json.html_safe %>;
+					$("#<%= user.twitter_id_str %>").append(tweet_template(tweet));
+				<% end %>
 			<% end %>
-		})
-	</script>
-<% end %>
+		<% end %>
+
+		$("#accordion").accordion({ header: "div", heightStyle: 'content', collapsible: true, active: false}); 
+	})
+</script>
+
+
+
+
+
+
+
