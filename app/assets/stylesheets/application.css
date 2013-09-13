@@ -31,13 +31,14 @@
  .group_link {
  	text-decoration: none;
  	font-size: 4em;
+ 	color: #000;
  }
  .group_link:hover {
  	text-decoration: underline;
  }
- .group_link:visited {
- 	color: #CCCC99;
- }
+ /*.group_link:visited {
+ 	/*color: #CCCC99;*/
+ }*/
  .group_name {
  	font-size: 4em;
  }
@@ -49,13 +50,17 @@
  	vertical-align: top;
  }
  .group_index {
- 	border-left: 5px black solid;
- 	border-right: 5px black solid;
  	margin-bottom: 10px;
  	padding-left: 20px;
+ 	cursor: pointer;
+ }
+ .group_index:hover {
+ 	background: #CCCC99;
  }
  .index_thumb {
  	padding: 5px;
+ 	width: 24px;
+ 	height: 24px;
  }
  .index_thumb:hover {
  	background-color: #CCCC99;
@@ -101,6 +106,17 @@
  }
  .location {
  	padding-left: 10px;
+ }
+ .time {
+ 	font-style: italic;
+ 	font-size: 1.3em;
+ 	padding-right: 15px;
+ 	display: block;
+ 	float: left;
+ 	width: 100px;
+ }
+ .tweet_text {
+ 	font-size: 0.7em;
  }
  .clearfix:after {
      visibility: hidden;

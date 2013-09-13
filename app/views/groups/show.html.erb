@@ -14,6 +14,8 @@
 </div>
 
 <script type="text/javascript">
+	var MONTH = {0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 
+					6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'};
 	$( function () {
 		var tweets = <%= @tweets.to_json.html_safe %>;
 		<% @users.each do |user| %>
@@ -25,7 +27,17 @@
 			<% else %>
 				<% @tweets[user.id][0].each do |tweet| %>
 					tweet = <%= tweet.to_json.html_safe %>;
-					$("#<%= user.twitter_id_str %>").append(tweet_template(tweet));
+					//console.log(Date.parse(tweet['created_at']) + " vs " + Date.now());
+					var tweet_date= new Date(Date.parse(tweet['created_at']));
+					var now = new Date();
+					var display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
+					// if ( tweet_date.getDate() == now.getDate() && tweet_date.getMonth() == now.getMonth() ) {
+					// 	var time_diff = now - tweet_date;
+					// 	display_time = time_diff;
+					// } else {
+					// 	display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
+					// }
+					$("#<%= user.twitter_id_str %>").append(tweet_template(tweet, display_time));
 				<% end %>
 			<% end %>
 		<% end %>

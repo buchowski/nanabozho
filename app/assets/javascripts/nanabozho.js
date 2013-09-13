@@ -22,8 +22,8 @@ function header_template (user) {
 			+ "<span>" + user['name'] + "</span><input class='user_id' type='hidden' " 
 			+ "name='group[users][]' id='" + user['id_str'] + "'>";
 }
-function tweet_template (tweet) {
-	return "<p><span>" + tweet['text'] + "</span><span>" + tweet['created_at'] + "</span></p>";
+function tweet_template (tweet, display_time) {
+	return "<p><span class='time'>" + display_time + "</span><span class='tweet_text'>" + tweet['text'] + "</span>";
 }
 function show_template (user) {
 	return "<div>" + header_template(user) + "</div><p id='" + user['twitter_id_str'] + "''></p>";
