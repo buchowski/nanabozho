@@ -1,4 +1,3 @@
-<% @group = Group.find(params[:id]) %>
 <div class="show_page_edit_button">
 	<a href="<%= edit_group_url %>">edit this group</a>
 </div>
@@ -6,7 +5,7 @@
 <span class="group_label">group name</span>
 <span class="group_name"><%= @group.name %></span>
 <span class="group_label">description</span>
-<span class="group_description"><%= @group.description %></span>
+	<span class="group_description"><%= @group.description %></span>
 <br>
 
 <span class="enter_group_name">Click to view a user's tweets</span>
@@ -14,15 +13,13 @@
 	<div id="accordion"></div>
 </div>
 
-<% @users = @group.users %>
-
 <script type="text/javascript">
 	$( function () {
 		var tweets = <%= @tweets.to_json.html_safe %>;
 		<% @users.each do |user| %>
 			var user_json = <%= user.to_json.html_safe %>;
-			$("#accordion").append(show_template(user_json));
 
+			$("#accordion").append(show_template(user_json));
 			<% if @tweets[user.id].empty? %>
 				$("#<%= user.twitter_id_str %>").append("<h1>Protected</h1>");
 			<% else %>

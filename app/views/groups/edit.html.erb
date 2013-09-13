@@ -4,17 +4,19 @@
 </form>
 
 <%= render 'search_form' %>
-<div id="users"></div>
 
 <script type="text/javascript">
 	$(function () {
 		<% @users.each do |user| %>
-			$("#search_results").append(template(<%= {
+			$("#users_to_add").append("<input type='hidden' name='group[users][]' id='user_<%= user.twitter_id_str %>'></input>")
+
+			$("#selected_users").append(template(<%= {
 				profile_image_url: user.profile_image_url, 
 				name: user.name, 
 				id_str: user.twitter_id_str 
 			}.to_json.html_safe %>));
 			$("#<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
+			$("#user_<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
 		<% end %>
 	})
 </script>

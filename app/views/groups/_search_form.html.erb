@@ -1,5 +1,12 @@
-<form action="<%= searches_url %>" method="POST" id="search_form">
-	<label class="control-label" for="user_name">User Search</label>
-	<input class="control" type="text" name="user[name]" id="user_name">
-	<input class="btn" type="submit" value="Search">
-</form>
+<span class="enter_group_name">Search for your group's Twitterers</span>
+	<div class="group_form clearfix">
+	<form action="<%= searches_url %>" method="POST" id="search_form">
+		<label class="control-label" for="user_name">User Search</label>
+		<input class="control" type="text" name="user[name]" id="user_name">
+		<input class="btn" type="submit" value="Search">
+	</form>
+	<div id="users">
+		<div id="searched_users"></div>
+		<div id="selected_users"></div>
+	</div>
+</span>
