@@ -91,6 +91,10 @@
  	border-top-right-radius: 20px 20px;
  	border-top-left-radius: 20px 20px;
  }
+ .group_form img {
+ 	width: 48px;
+ 	height: 48px;
+ }
  #selected_users {
  	width: 50%;
  	float: right;
@@ -117,6 +121,9 @@
  }
  .tweet_text {
  	font-size: 0.7em;
+ }
+ #prev_page {
+ 	display: none;
  }
  .clearfix:after {
      visibility: hidden;

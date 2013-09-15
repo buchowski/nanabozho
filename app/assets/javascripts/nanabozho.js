@@ -12,6 +12,20 @@ function selectResult () {
 		$("#selected_users").prepend($(this));
 	}
 }
+function changePage (e) {
+	e.preventDefault();
+	var page_num = $("#page_num").val();
+	if ( $(e.target).attr('id') == 'next_page' ) {
+		page_num++;
+		if ( page_num == 2 ) { $("#prev_page").css({ 'display': 'inline' }) }
+	} else {
+		page_num--;
+		if ( page_num == 1 ) { $("#prev_page").css({ 'display': 'none' }) }
+	} 
+	$("#page_num").val(page_num);
+	console.log(page_num);
+	$("#search_form").trigger('submit');
+}
 function template (user) {
 	return "<div class='search_result'><img class='search_img' src='" + user['profile_image_url'] + "'>"
 			+ "<span class='username'>" + user['name'] + "</span><br><span class='location'>" + user['location'] + "</span>"
@@ -31,6 +45,7 @@ function show_template (user) {
 $(function () {
 	$("#selected_users").on('click', '.search_result', selectResult)
 	$("#searched_users").on('click', '.search_result', selectResult)
+	$(".change_page").on('click', changePage);
 	$("#search_form").on("submit", function (e) {
 		e.preventDefault();
 

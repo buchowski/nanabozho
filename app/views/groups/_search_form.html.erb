@@ -3,10 +3,19 @@
 	<form action="<%= searches_url %>" method="POST" id="search_form">
 		<label class="control-label" for="user_name">User Search</label>
 		<input class="control" type="text" name="user[name]" id="user_name">
+		<input id="page_num" type='hidden' name="user[page]" value='1'>
 		<input class="btn" type="submit" value="Search">
+
+		<a id="prev_page" class='change_page' href="">Prev</a>
+		<a id="next_page" class='change_page' href="">Next</a>
 	</form>
 	<div id="users">
 		<div id="searched_users"></div>
 		<div id="selected_users"></div>
 	</div>
 </span>
+<script type="text/javascript">
+	$(function () {
+		$("#page_num").val('1');
+	})
+</script>

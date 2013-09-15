@@ -16,7 +16,7 @@ class SearchesController < ApplicationController
 
 		baseurl = "https://api.twitter.com"
 		path    = "/1.1/users/search.json"
-		query   = URI.encode_www_form("q" => @user['name'])
+		query   = URI.encode_www_form("q" => @user['name'], "page" => @user['page'])
 		address = URI("#{baseurl}#{path}?#{query}")
 
 		request = Net::HTTP::Get.new address.request_uri

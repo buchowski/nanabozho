@@ -27,16 +27,9 @@
 			<% else %>
 				<% @tweets[user.id][0].each do |tweet| %>
 					tweet = <%= tweet.to_json.html_safe %>;
-					//console.log(Date.parse(tweet['created_at']) + " vs " + Date.now());
 					var tweet_date= new Date(Date.parse(tweet['created_at']));
 					var now = new Date();
 					var display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
-					// if ( tweet_date.getDate() == now.getDate() && tweet_date.getMonth() == now.getMonth() ) {
-					// 	var time_diff = now - tweet_date;
-					// 	display_time = time_diff;
-					// } else {
-					// 	display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
-					// }
 					$("#<%= user.twitter_id_str %>").append(tweet_template(tweet, display_time));
 				<% end %>
 			<% end %>
