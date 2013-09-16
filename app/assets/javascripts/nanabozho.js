@@ -1,5 +1,4 @@
 function selectResult () {
-	console.log($(this).parent().attr('id'));
 	if ( $(this).parent().attr('id') == 'selected_users' ) {
 		$("#users_to_add").children("#user_" + $(this).children("input").attr('id')).remove();
 		$(this).remove();
@@ -17,13 +16,12 @@ function changePage (e) {
 	var page_num = $("#page_num").val();
 	if ( $(e.target).attr('id') == 'next_page' ) {
 		page_num++;
-		if ( page_num == 2 ) { $("#prev_page").css({ 'display': 'inline' }) }
+		if ( page_num == 2 ) { $("#prev_page").toggleClass('disabled') }
 	} else {
 		page_num--;
-		if ( page_num == 1 ) { $("#prev_page").css({ 'display': 'none' }) }
+		if ( page_num == 1 ) { $("#prev_page").toggleClass('disabled') }
 	} 
 	$("#page_num").val(page_num);
-	console.log(page_num);
 	$("#search_form").trigger('submit');
 }
 function template (user) {
@@ -43,8 +41,7 @@ function show_template (user) {
 	return "<div>" + header_template(user) + "</div><p id='" + user['twitter_id_str'] + "''></p>";
 }
 $(function () {
-	$("#selected_users").on('click', '.search_result', selectResult)
-	$("#searched_users").on('click', '.search_result', selectResult)
+	$(".user_div").on('click', '.search_result', selectResult)
 	$(".change_page").on('click', changePage);
 	$("#search_form").on("submit", function (e) {
 		e.preventDefault();
@@ -57,6 +54,7 @@ $(function () {
 			data: form.serialize(),
 			success: function (response) {
 				$("#searched_users").empty();
+				$('#users').toggleClass('none', false);
 				for ( var i = 0; i < response.length; i++) {
 					$("#searched_users").append(template(response[i]));
 					$("#" + response[i]['id_str']).val(JSON.stringify(response[i]));

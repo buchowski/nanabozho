@@ -5,13 +5,20 @@
 		<input class="control" type="text" name="user[name]" id="user_name">
 		<input id="page_num" type='hidden' name="user[page]" value='1'>
 		<input class="btn" type="submit" value="Search">
-
-		<a id="prev_page" class='change_page' href="">Prev</a>
-		<a id="next_page" class='change_page' href="">Next</a>
 	</form>
-	<div id="users">
-		<div id="searched_users"></div>
-		<div id="selected_users"></div>
+	<div id="users" class="none">
+		<div id="search_controls">
+			<div id='searched_users_label_div'>
+				<h2 class='inline'>Search Results</h2>
+				<a id="prev_page" class='change_page disabled' href="">Prev</a>
+				<a id="next_page" class='change_page' href="">Next</a>	
+			</div>
+			<div id='selected_users_label_div'>
+				<h2 class='inline'>Group Members</h2>
+			</div>
+		</div>
+		<div class='user_div' id="searched_users"></div>
+		<div class='user_div' id="selected_users"></div>
 	</div>
 </span>
 <script type="text/javascript">

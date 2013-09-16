@@ -100,9 +100,18 @@
  	float: right;
  }
  #searched_users {
+ 	clear: both;
  	width: 50%;
  	float: left;
  }
+#searched_users_label_div {
+	width: 50%;
+ 	float: left;
+}
+#selected_users_label_div {
+	width: 50%;
+ 	float: right;
+}
  .username {
  	padding-left: 10px;
  	font-weight: bold;
@@ -122,8 +131,10 @@
  .tweet_text {
  	font-size: 0.7em;
  }
- #prev_page {
- 	display: none;
+ .disabled {
+ 	color: gray;
+ 	text-decoration: none;
+ 	cursor: default;
  }
  .clearfix:after {
      visibility: hidden;
@@ -132,7 +143,17 @@
      content: " ";
      clear: both;
      height: 0;
-     }
+ }
+ .inline {
+ 	display: inline;
+ }
+ .none {
+ 	display: none;
+ }
+ #search_controls {
+ 	padding-top: 10px;
+ 	padding-bottom: 40px;
+ }
 .clearfix { display: inline-block; }
 /* start commented backslash hack \*/
 * html .clearfix { height: 1%; }
