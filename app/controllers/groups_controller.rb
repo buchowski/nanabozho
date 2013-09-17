@@ -22,14 +22,14 @@ class GroupsController < ApplicationController
   	 	@group.save!	
       params[:group][:users].each do |user|
         user_json = JSON.parse(user)
-        
+        p user_json['location']
         @user = User.new({
             name: user_json['name'], 
             description: user_json['description'],
             profile_image_url: user_json['profile_image_url'], 
-            location: user_json['location'],
             twitter_id_str: user_json['id_str'], 
-            json_str: user
+            json_str: user,
+            location: user_json['location']
         })
         if @user.valid?
           @user.save! 
