@@ -3,6 +3,8 @@ Nanabozho::Application.routes.draw do
   resources :users
   resources :searches
 
+  root :to => "groups#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

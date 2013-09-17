@@ -27,6 +27,7 @@ class GroupsController < ApplicationController
             name: user_json['name'], 
             description: user_json['description'],
             profile_image_url: user_json['profile_image_url'], 
+            location: user_json['location'],
             twitter_id_str: user_json['id_str'], 
             json_str: user
         })
@@ -66,7 +67,8 @@ class GroupsController < ApplicationController
       @user = User.find_by_twitter_id_str(id_str)
       if @user #old but not group member
         @user.update_attributes(:name => user_json['name'], :profile_image_url => user_json['profile_image_url'], 
-          :twitter_id_str => user_json['id_str'], :description => user_json['description'], :json_str => user)
+          :twitter_id_str => user_json['id_str'], :description => user_json['description'], :json_str => user,
+          :location => user_json['location'])
         if @user.valid?
           @user.save!
         end
@@ -76,7 +78,7 @@ class GroupsController < ApplicationController
       else # new and therefore not group member
         @user = User.new({name: user_json['name'], description: user_json['description'], json_str: user_json[:json_str], 
                   profile_image_url: user_json['profile_image_url'], twitter_id_str: user_json['id_str'], 
-                  json_str: user})
+                  json_str: user, :location => user_json['location']})
         if @user.valid?
           @user.save!
           Membership.create!({group_id: @group.id, user_id: @user.id})

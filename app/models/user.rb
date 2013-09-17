@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :description, :name, :profile_image_url, :twitter_id_str, :json_str
+  attr_accessible :description, :name, :profile_image_url, :twitter_id_str, :json_str, :location
 
   has_many(
     	:memberships,

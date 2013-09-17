@@ -14,7 +14,8 @@
 			$("#selected_users").append(template(<%= {
 				profile_image_url: user.profile_image_url, 
 				name: user.name, 
-				id_str: user.twitter_id_str 
+				id_str: user.twitter_id_str,
+				location: user.location
 			}.to_json.html_safe %>));
 			$("#<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
 			$("#user_<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
