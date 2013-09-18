@@ -1,13 +1,5 @@
-<div class="show_page_edit_button">
-	<a href="<%= edit_group_url %>">edit this group</a>
-</div>
-<br>
-<span class="group_label">group name</span>
-<span class="group_name"><%= @group.name %></span>
-<span class="group_label">description</span>
-	<span class="group_description"><%= @group.description %></span>
-<br>
-
+<h2><%= @group.name %></h2>
+<p><%= @group.description %></p>
 <span class="enter_group_name">Click to view a user's tweets</span>
 <div class="group_form">
 	<div id="accordion"></div>
@@ -17,6 +9,7 @@
 	var MONTH = {0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 
 					6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'};
 	$( function () {
+		$('#header_links').append("<a href='<%= edit_group_url %>'>Edit This Group</a>");
 		var tweets = <%= @tweets.to_json.html_safe %>;
 		<% @users.each do |user| %>
 			var user_json = <%= user.to_json.html_safe %>;
