@@ -11,6 +11,10 @@ function selectResult () {
 		$("#selected_users").prepend($(this));
 	}
 }
+function toggleHelp (e) {
+	e.preventDefault();
+	$("#help_text").slideToggle(600);
+}
 function changePage (e) {
 	e.preventDefault();
 	var page_num = $("#page_num").val();
@@ -43,6 +47,7 @@ function show_template (user) {
 $(function () {
 	$(".user_div").on('click', '.search_result', selectResult)
 	$(".change_page").on('click', changePage);
+	$("#help_link").on('click', toggleHelp);
 	$("#search_form").on("submit", function (e) {
 		e.preventDefault();
 
