@@ -1,34 +1,39 @@
 <h2><%= @group.name %></h2>
 <p><%= @group.description %></p>
 <span class="enter_group_name">Click to view a user's tweets</span>
-<div class="group_form">
-	<div id="accordion"></div>
+<div id='group' class='group_form'>
+	<% @users.each do |user| %>
+		<div id='<%= user.id %>' onclick='ajax(<%= user.id %>)'>
+			<img src='<%= user.profile_image_url %>'>
+			<span><%= user.name %></span>
+			<table class='table table-striped'></table>
+		</div>
+	<% end %>
 </div>
 
 <script type="text/javascript">
 	var MONTH = {0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 
 					6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'};
+	function ajax(id) {
+		$.ajax({
+			url: '/users/' + id,
+			type: 'GET',
+			dataType: 'json',
+			success: function (response) {
+				if (response.length == 0) $("#" + id + " > table").append("<tr><td>No Hay Tweet</td></tr>");
+				_.each(response, function (tweet) {
+					var tweet_date = new Date(Date.parse(tweet['created_at']));
+					var display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
+					$("#" + id + " > table").append(tweet_template(tweet, display_time));
+				})
+			},
+			error: function (response) {
+				console.log('ERROR: ' + response);
+			}
+		})
+	}
 	$( function () {
 		$('#header_links').append("<a href='<%= edit_group_url %>'>Edit This Group</a>");
-		var tweets = <%= @tweets.to_json.html_safe %>;
-		<% @users.each do |user| %>
-			var user_json = <%= user.to_json.html_safe %>;
-
-			$("#accordion").append(show_template(user_json));
-			<% if @tweets[user.id].empty? %>
-				$("#<%= user.twitter_id_str %>").append("<h1>Protected</h1>");
-			<% else %>
-				<% @tweets[user.id][0].each do |tweet| %>
-					tweet = <%= tweet.to_json.html_safe %>;
-					var tweet_date= new Date(Date.parse(tweet['created_at']));
-					var now = new Date();
-					var display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
-					$("#<%= user.twitter_id_str %>").append(tweet_template(tweet, display_time));
-				<% end %>
-			<% end %>
-		<% end %>
-
-		$("#accordion").accordion({ header: "div", heightStyle: 'content', collapsible: true, active: false}); 
 	})
 </script>
 

@@ -1,6 +1,9 @@
 <div class="group_form">
+	<table class="table table-striped">
 	<% @groups.each do |group| %>
-		<div class="group_index" onclick="window.location.href='<%= group_url(group) %>'">
+
+		<tr class="group_index" onclick="window.location.href='<%= group_url(group) %>'">
+			<td>
 			<span class="username"><%= group.name %></span>
 			<span>
 				<%= group.description %>
@@ -9,8 +12,10 @@
 				<% group.users.each do |user| %>
 					<img class="index_thumb" title="<%= user.name %>" src="<%= user.profile_image_url %>"></img>
 				<% end %>
-		</div>
+			</td>
+		</tr>
 	<% end %>
+	</table>
 </div>
 
 	

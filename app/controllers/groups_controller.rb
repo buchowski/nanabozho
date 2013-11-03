@@ -7,7 +7,6 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = @group.users
-    @tweets = tweets(@users)
 
     render :show
   end
@@ -95,7 +94,7 @@ class GroupsController < ApplicationController
       @membership.destroy
     end
     @users = @group.users
-    @tweets = tweets(@users)
+
     render :show
   end
   

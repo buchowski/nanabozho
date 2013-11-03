@@ -31,7 +31,7 @@ function changePage (e) {
 function template (user) {
 	return "<div class='search_result'><img class='search_img' src='" + user['profile_image_url'] + "'>"
 			+ "<span class='username'>" + user['name'] + "</span><br><span class='location'>" + user['location'] + "</span>"
-			+ "<input class='user_id' type='hidden' name='group[users][]' id='" + user['id_str'] + "'></div>";
+			+ "<input class='user_id' type='hidden' name='group[users][]' id='" + user['id_str'] + "'>";
 }
 function header_template (user) {
 	return "<img src='" + user['profile_image_url'] + "'>"
@@ -39,7 +39,8 @@ function header_template (user) {
 			+ "name='group[users][]' id='" + user['id_str'] + "'>";
 }
 function tweet_template (tweet, display_time) {
-	return "<p><span class='time'>" + display_time + "</span><span class='tweet_text'>" + tweet['text'] + "</span>";
+	return "<tr><td><p><span class='time'>" + display_time + "</span>" 
+			+ "<span class='tweet_text'>" + tweet['text'] + "</span></td></tr>";
 }
 function show_template (user) {
 	return "<div>" + header_template(user) + "</div><p id='" + user['twitter_id_str'] + "''></p>";
@@ -52,6 +53,7 @@ $(function () {
 		e.preventDefault();
 
 		var form = $(this);
+		console.log(form.serialize());
 		$.ajax({
 			url: '/searches',
 			type: 'POST',
