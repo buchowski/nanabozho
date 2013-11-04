@@ -1,26 +1,35 @@
-<span class="enter_group_name">Search for your group's Twitterers</span>
-	<div class="group_form clearfix">
-	<form action="<%= searches_url %>" method="POST" id="search_form">
-		<label class="control-label" for="user_name">User Search</label>
-		<input class="control" type="text" name="user[name]" id="user_name">
-		<input id="page_num" type='hidden' name="user[page]" value='1'>
-		<input class="btn" type="submit" value="Search">
-	</form>
-	<div id="users" class="none">
+<h1>Search for your group's Twitterers</h1>
+<!-- <div class="clearfix"></div> -->
+<form action="<%= searches_url %>" method="POST" id="search_form" class="form-inline" role="form">
+	<div class="form-group">
+		<label class="sr-only" for="user_name">User Search</label>
+		<input class="form-control" type="text" name="user[name]" id="user_name" placeholder="Search Term">
+	</div>
+	<input id="page_num" type='hidden' name="user[page]" value='1'>
+	<button type="submit" class="btn btn-default">Search</button>
+</form>
+
+<div class="container">
+	<div class="col-md-6">
 		<div id="search_controls">
 			<div id='searched_users_label_div'>
 				<h2 class='inline'>Search Results</h2>
 				<a id="prev_page" class='change_page disabled' href="">Prev</a>
 				<a id="next_page" class='change_page' href="">Next</a>	
 			</div>
-			<div id='selected_users_label_div'>
-				<h2 class='inline'>Group Members</h2>
-			</div>
 		</div>
 		<div class='user_div' id="searched_users"></div>
+	</div>
+	<div class="col-md-6">
+		<div id='selected_users_label_div'>
+			<h2 class='inline'>Group Members</h2>
+		</div>
 		<div class='user_div' id="selected_users"></div>
 	</div>
-</span>
+</div>
+
+
+
 <script type="text/javascript">
 	$(function () {
 		$("#page_num").val('1');

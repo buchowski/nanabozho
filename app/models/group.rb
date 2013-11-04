@@ -12,4 +12,5 @@ class Group < ActiveRecord::Base
     	:through => :memberships,
     	:source => :user
     )
+
 end

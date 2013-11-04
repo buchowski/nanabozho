@@ -1,15 +1,24 @@
-<h2><%= @group.name %></h2>
-<p><%= @group.description %></p>
-<span class="enter_group_name">Click to view a user's tweets</span>
-<div id='group' class='group_form'>
-	<% @users.each do |user| %>
-		<div id='<%= user.id %>' onclick='ajax(<%= user.id %>)'>
-			<img src='<%= user.profile_image_url %>'>
-			<span><%= user.name %></span>
-			<table class='table table-striped'></table>
+<div class="container">
+	<div class="col-md-10">
+		<h2><%= @group.name %></h2>
+		<p><%= @group.description %></p>
+		<span class="enter_group_name">Click to view a user's tweets</span>
+		<div id='group' class='group_form'>
+			<% @users.each do |user| %>
+				<div id='<%= user.id %>' onclick='ajax(<%= user.id %>)'>
+					<img src='<%= user.profile_image_url %>'>
+					<span><%= user.name %></span>
+					<table class='table table-striped'></table>
+				</div>
+			<% end %>
 		</div>
-	<% end %>
+	</div>
+	<div class="col-md-2">
+		<h1>SPACE</h1>
+		<%= render 'login_form' %>
+	</div>
 </div>
+
 
 <script type="text/javascript">
 	var MONTH = {0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 

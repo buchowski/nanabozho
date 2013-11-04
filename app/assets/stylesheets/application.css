@@ -12,9 +12,23 @@
  *= require_tree .
  *= require jquery.ui.accordion
  */
- body {
+/* body {
  	width: 80%;
  	padding-left: 10%;
+ }*/
+ .userbox {
+ 	float: left;
+ 	padding-right: 10px;
+ 	padding-bottom: 20px;
+ }
+ .groupbox {
+  	clear: both;
+ }
+ .groupbox h3 {
+ 	margin-top: 5px;
+ }
+ .content {
+ 	padding-top: 60px;
  }
  .search_result:hover {
  	background: #CCCC99;
@@ -42,50 +56,46 @@
  .group_name {
  	font-size: 4em;
  }
- .group_description {
-
- }
  /*.group_label {
  	color: #CCCC99;
  	vertical-align: top;
  }*/
- .group_index {
+/* .group_index {
  	margin-bottom: 10px;
  	padding-left: 20px;
  	cursor: pointer;
- }
+ }*/
  .group_index:hover {
  	background: #CCCC99;
  }
- .index_thumb {
+/* .index_thumb {
  	padding: 5px;
  	width: 24px;
  	height: 24px;
  }
- .index_thumb:hover {
+*/ .index_thumb:hover {
  	background-color: #CCCC99;
  	cursor: pointer;
  }
- .show_page_edit_button {
+.show_page_edit_button {
  	padding: 15px;
  }
  .enter_group_name {
  	font-size: 1.2em;
  }
- #group_form_labels {
+#group_form_labels {
  	padding-right: 20px;
  	vertical-align: top;
  }
- #group_form_input {
- }
+
  #group_form_labels {
  	float: left;
  }
  .group_form {
  	height: auto;
- 	padding: 20px;
+/* 	padding: 20px;
  	margin: 10px;
- 	border: 2px solid #CCCC99;
+*/ 	border: 2px solid #CCCC99;
  	border-bottom-right-radius: 20px 20px;
  	border-bottom-left-radius: 20px 20px;
  	border-top-right-radius: 20px 20px;
@@ -96,28 +106,28 @@
  	height: 48px;
  }
  #selected_users {
- 	width: 50%;
+ 	/*width: 50%;*/
  	float: right;
  }
  #searched_users {
  	clear: both;
- 	width: 50%;
+ 	/*width: 50%;*/
  	float: left;
  }
 #searched_users_label_div {
-	width: 50%;
+	/*width: 50%;*/
  	float: left;
 }
 #selected_users_label_div {
-	width: 50%;
+	/*width: 50%;*/
  	float: right;
 }
- .username {
+.username {
  	padding-left: 10px;
  	font-weight: bold;
  	font-size: 2em;
  }
- .location {
+.location {
  	padding-left: 10px;
  }
  .time {

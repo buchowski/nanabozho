@@ -2,6 +2,9 @@ include UsersHelper
 class GroupsController < ApplicationController
   def index
   	@groups = Group.all
+
+    # SELECT u.name, u.profile_image_url, g.name, g.description FROM memberships AS m JOIN groups AS g ON m.group_id = g.id JOIN users AS u ON m.user_id = u.id;
+
   end
 
   def show
