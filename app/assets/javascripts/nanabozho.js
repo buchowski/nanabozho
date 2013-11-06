@@ -9,10 +9,6 @@ function removeUser () {
 	$("#user_" + $(this).children("input").attr('id')).remove();
 	$(this).remove();
 }
-// function toggleHelp (e) {
-// 	e.preventDefault();
-// 	$("#help_text").slideToggle(600);
-// }
 function changePage (e) {
 	e.preventDefault();
 	var page_num = $("#page_num").val();
@@ -37,8 +33,22 @@ function header_template (user) {
 			+ "name='group[users][]' id='" + user['id_str'] + "'>";
 }
 function tweet_template (tweet, display_time) {
+
+	var tweet_str = _.map(tweet['text'].split(" "), function(word) {
+
+		if (word[0] == "@" && word.length > 1) {
+			var user = (word[word.length - 1] == ":") ? word.substring(1, word.length - 1) : word.substring(1);
+			return "<a href='https://twitter.com/" + user + "'>" + word + "</a>";
+		} else if (word[0] == "#" && word.length > 1) {
+			var hash = (word[word.length - 1] == ":") ? word.substring(1, word.length - 1) : word.substring(1);
+			return "<a href='https://twitter.com/search?q=" + hash + "&amp;src=hash'>" + word + "</a>";
+		} else {
+			return word;
+		}
+	}).join(" ")
+
 	return "<tr><td><p><span class='time'>" + display_time + "</span>" 
-			+ "<span class='tweet_text'>" + tweet['text'] + "</span></td></tr>";
+			+ "<span class='tweet_text'>" + tweet_str + "</span></td></tr>";
 }
 function show_template (user) {
 	return "<div>" + header_template(user) + "</div><p id='" + user['twitter_id_str'] + "''></p>";
