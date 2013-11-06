@@ -1,0 +1,20 @@
+<% @groups.each do |group| %>
+	<% users = group[1] %>
+	<div class="groupbox">
+		<div class="userbox">
+			<% 6.times do |j| %>
+				<% if j == 3 %>
+					<br>
+				<% end %>
+				<% if j < users.size %>
+					<img src="<%= users[j]['profile_image_url'] %>" title="<%= users[j]['name'] %>"></img>
+				<% else %>
+					<img src="https://1.gravatar.com/avatar/c9b64f924b5712b51388ff5a1222be6e?d=https%3A%2F%2Fidenticons.github.com%2F0338500963cd12807e2d5154305c44f9.png&amp;r=x&amp;s=440" title="Buchowski"></img>
+				<% end %>
+			<% end %>
+		</div>
+		<h4><a href="<%= group_url(group[0]) %>"><%= group[0].name %></a></h4>
+		<p>by Buchowski</p>
+		<p><%= users.size %> members</p>
+	</div>
+<% end %>

@@ -1,56 +1,16 @@
 <div class="container">
 	<div class="col-md-10">
 		<h1>ze Groups</h1>
-
-		<!-- This is a terrible solution. fix it! -->
+		<% mid = @user_groups.size / 2 %>
+		<% left_group, right_group = @user_groups[0...mid], @user_groups[mid..-1] %>
 
 		<div id="left_group" class="col-md-6">
-			<% @groups.each_with_index do |group, index| %>
-				<% if index % 2 == 0 %>
-					<div class="groupbox">
-						<div class="userbox">
-							<% users = group.users %>
-							<% 6.times do |i| %>
-								<% if i == 3 %>
-									<br>
-								<% end %>
-								<% if i < users.size %>
-									<img src="<%= users[i].profile_image_url %>" title="<%= users[i].name %>"></img>
-								<% else %>
-									<img src="http://a0.twimg.com/profile_images/1111257889/img_2839_normal.jpg" title="Hulkster"></img>
-								<% end %>
-							<% end %>
-						</div>
-						<h3><a href="<%= group_url(group) %>"><%= group.name %></a></h3>
-						<p>by Bucholz</p>
-						<p><%= group.users.size %> members</p>
-					</div>
-				<% end %>
-			<% end %>
+			<% @groups = left_group %>
+			<%= render 'group_column' %>
 		</div>
 		<div id="right_group" class="col-md-6">
-			<% @groups.each_with_index do |group, index| %>
-				<% if index % 2 != 0 %>
-					<div class="groupbox">
-						<div class="userbox">
-							<% users = group.users %>
-							<% 6.times do |i| %>
-								<% if i == 3 %>
-									<br>
-								<% end %>
-								<% if i < users.size %>
-									<img src="<%= users[i].profile_image_url %>" title="<%= users[i].name %>"></img>
-								<% else %>
-									<img src="http://a0.twimg.com/profile_images/1111257889/img_2839_normal.jpg" title="Hulkster"></img>
-								<% end %>
-							<% end %>
-						</div>
-						<h3><a href="<%= group_url(group) %>"><%= group.name %></a></h3>
-						<p>by Bucholz</p>
-						<p><%= group.users.size %> members</p>
-					</div>
-				<% end %>
-			<% end %>
+			<% @groups = right_group %>
+			<%= render 'group_column' %>
 		</div>
 	</div>
 	<div class="col-md-2">

@@ -7,12 +7,12 @@ class SearchesController < ApplicationController
 	def create
 		@user = params[:user]
 
-	  	consumer_key = OAuth::Consumer.new(
-	        ENV['CONSUMER_KEY'],
-	        ENV['CONSUMER_SECRET'])
-	    access_token = OAuth::Token.new(
-	        ENV['ACCESS_TOKEN'],
-	        ENV['ACCESS_TOKEN_SECRET'])
+		 	consumer_key = OAuth::Consumer.new(
+		       ENV['CONSUMER_KEY'],
+		       ENV['CONSUMER_SECRET'])
+		   access_token = OAuth::Token.new(
+		       ENV['ACCESS_TOKEN'],
+		       ENV['ACCESS_TOKEN_SECRET'])
 
 		baseurl = "https://api.twitter.com"
 		path    = "/1.1/users/search.json"

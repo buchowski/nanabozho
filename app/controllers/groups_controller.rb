@@ -1,37 +1,33 @@
-include UsersHelper
 class GroupsController < ApplicationController
   def index
-  	@groups = Group.all
+    @user_groups = []
+  	groups = Group.limit(10);
 
-    # SELECT u.name, u.profile_image_url, g.name, g.description FROM memberships AS m JOIN groups AS g ON m.group_id = g.id JOIN users AS u ON m.user_id = u.id;
-
+    groups.each do |group|
+      ids = group.users.pluck(:twitter_id_str)
+      users = get_users(ids)
+      @user_groups << [group, users]
+    end
   end
 
   def show
     @group = Group.find(params[:id])
-    @users = @group.users
-
-    render :show
+    ids = @group.users.pluck(:twitter_id_str)
+    @users = get_users(ids)
   end
 
   def new
     @group = Group.new()
+    @url = groups_url
   end
 
   def create
   	@group = Group.new({name: params[:group][:name], description: params[:group][:description]})
   	if @group.valid? 
   	 	@group.save!	
-      params[:group][:users].each do |user|
-        user_json = JSON.parse(user)
-        p user_json['location']
+      params[:group][:users].each do |id_str|
         @user = User.new({
-            name: user_json['name'], 
-            description: user_json['description'],
-            profile_image_url: user_json['profile_image_url'], 
-            twitter_id_str: user_json['id_str'], 
-            json_str: user,
-            location: user_json['location']
+            twitter_id_str: id_str 
         })
         if @user.valid?
           @user.save! 
@@ -41,13 +37,14 @@ class GroupsController < ApplicationController
       redirect_to group_url(@group)
     else
       render :new
-      
     end
   end
 
   def edit
     @group = Group.find(params[:id])
-    @users = @group.users
+    ids = @group.users.pluck(:twitter_id_str)
+    @users = get_users(ids)
+    @url = group_url(@group)
   end
 
   def update
@@ -61,26 +58,15 @@ class GroupsController < ApplicationController
     existing_users = @group.users.pluck(:twitter_id_str)
     future_users = []
 
-    #update & add users. add memberships if necessary
-    params[:group][:users].each do |user|
-      user_json = JSON.parse(user)
-      id_str = user_json['id_str']
+    params[:group][:users].each do |id_str|
       future_users << id_str
       @user = User.find_by_twitter_id_str(id_str)
-      if @user #old but not group member
-        @user.update_attributes(:name => user_json['name'], :profile_image_url => user_json['profile_image_url'], 
-          :twitter_id_str => user_json['id_str'], :description => user_json['description'], :json_str => user,
-          :location => user_json['location'])
-        if @user.valid?
-          @user.save!
-        end
-        unless existing_users.include?(id_str) #add membership too
+      if @user # user is already in the db
+        unless existing_users.include?(id_str) #add membership too if user's not part of current group
           Membership.create!({group_id: @group.id, user_id: @user.id})
         end
       else # new and therefore not group member
-        @user = User.new({name: user_json['name'], description: user_json['description'], json_str: user_json[:json_str], 
-                  profile_image_url: user_json['profile_image_url'], twitter_id_str: user_json['id_str'], 
-                  json_str: user, :location => user_json['location']})
+        @user = User.new({twitter_id_str: id_str})
         if @user.valid?
           @user.save!
           Membership.create!({group_id: @group.id, user_id: @user.id})
@@ -90,13 +76,13 @@ class GroupsController < ApplicationController
     
     #delete memberships 
     members_to_delete = existing_users.select { |user| !future_users.include?(user) }
-    dogs = members_to_delete.map do |id_str|
+    members_to_delete.each do |id_str|
       @user = User.find_by_twitter_id_str(id_str)
-      p "group #{@group.id}, user #{@user.id}"
       @membership = Membership.find_by_group_id_and_user_id(@group.id, @user.id)
       @membership.destroy
     end
-    @users = @group.users
+    ids = @group.users.pluck(:twitter_id_str)
+    @users = get_users(ids)
 
     render :show
   end

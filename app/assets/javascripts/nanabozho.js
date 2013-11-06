@@ -1,20 +1,18 @@
-function selectResult () {
-	if ( $(this).parent().attr('id') == 'selected_users' ) {
-		$("#users_to_add").children("#user_" + $(this).children("input").attr('id')).remove();
-		$(this).remove();
-		$("#searched_users").prepend($(this));
-	} else {
-		var user_id = $(this).children("input").attr('id');
-		$(this).children("input").clone().appendTo($("#users_to_add"));
-		$("#" + user_id).attr('id', 'user_' + user_id);
-		$(this).remove();
-		$("#selected_users").prepend($(this));
-	}
+function addUser () {
+	var user_id = $(this).children("input").attr('id');
+	$(this).clone().prependTo($("#current_members"));
+	$("#current_members").scrollTop = 0;
+	$("#users_to_add").append(hidden_template({ twitter_id_str: user_id }));
+	$(this).remove(); 
 }
-function toggleHelp (e) {
-	e.preventDefault();
-	$("#help_text").slideToggle(600);
+function removeUser () {
+	$("#user_" + $(this).children("input").attr('id')).remove();
+	$(this).remove();
 }
+// function toggleHelp (e) {
+// 	e.preventDefault();
+// 	$("#help_text").slideToggle(600);
+// }
 function changePage (e) {
 	e.preventDefault();
 	var page_num = $("#page_num").val();
@@ -45,26 +43,27 @@ function tweet_template (tweet, display_time) {
 function show_template (user) {
 	return "<div>" + header_template(user) + "</div><p id='" + user['twitter_id_str'] + "''></p>";
 }
+function hidden_template (user) {
+	return "<input type='hidden' name='group[users][]' id='user_" + user['twitter_id_str'] + "'" 
+				+ "value='" + user['twitter_id_str'] + "'></input>";
+}
 $(function () {
-	$(".user_div").on('click', '.search_result', selectResult)
+	$("#current_members").on("click", ".search_result", removeUser);
+	$(".searched_users").on("click", ".search_result", addUser);
 	$(".change_page").on('click', changePage);
-	$("#help_link").on('click', toggleHelp);
 	$("#search_form").on("submit", function (e) {
 		e.preventDefault();
-
 		var form = $(this);
-		console.log(form.serialize());
 		$.ajax({
 			url: '/searches',
 			type: 'POST',
 			dataType: 'json',
 			data: form.serialize(),
 			success: function (response) {
-				$("#searched_users").empty();
-				$('#users').toggleClass('none', false);
+				$("#searched_users_0").empty();
+				$("#searched_users_1").empty();
 				for ( var i = 0; i < response.length; i++) {
-					$("#searched_users").append(template(response[i]));
-					$("#" + response[i]['id_str']).val(JSON.stringify(response[i]));
+					$("#searched_users_" + (i % 2)).append(template(response[i]));
 				}
 			},
 			error: function (response) {

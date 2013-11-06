@@ -9,9 +9,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
-		@tweets = tweets(@user)
-
+		@tweets = tweets(params[:id])
 		render :json => @tweets
 	end
 end

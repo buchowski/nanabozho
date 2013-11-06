@@ -1,33 +1,20 @@
-<div class="container">
-	<div class="col-md-10">
-		<form action="<%= group_url %>" method="POST">
-			<input type="hidden" name="_method" value="PUT"></input>
-			<%= render 'group_form' %>
-		</form>
-
-		<%= render 'search_form' %>
-
-	</div>
-	<div class="col-md-2">
-		<h1>SPACE</h1>
-		<%= render 'login_form' %>
-	</div>
-</div>
+<%= render 'manage_group' %>
 
 <script type="text/javascript">
 	$(function () {
+		$("#page_num").val('1');
 		$('#users').toggleClass('none', false);
 		<% @users.each do |user| %>
-			$("#users_to_add").append("<input type='hidden' name='group[users][]' id='user_<%= user.twitter_id_str %>'></input>")
-
-			$("#selected_users").append(template(<%= {
-				profile_image_url: user.profile_image_url, 
-				name: user.name, 
-				id_str: user.twitter_id_str,
-				location: user.location
+			$("#users_to_add").append(hidden_template(<%= {
+				twitter_id_str: user['id_str']
 			}.to_json.html_safe %>));
-			$("#<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
-			$("#user_<%= user.twitter_id_str %>").val(JSON.stringify(<%= user.json_str.html_safe %>));
+
+			$("#current_members").append(template(<%= {
+				profile_image_url: user['profile_image_url'], 
+				name: user['name'], 
+				id_str: user['id_str'],
+				location: user['location']
+			}.to_json.html_safe %>));
 		<% end %>
 	})
 </script>

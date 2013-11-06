@@ -1,17 +1,15 @@
 <div class="container">
 	<div class="col-md-10">
-		<h2><%= @group.name %></h2>
+		<h1><%= @group.name %></h1>
 		<p><%= @group.description %></p>
-		<span class="enter_group_name">Click to view a user's tweets</span>
-		<div id='group' class='group_form'>
+		<h1>Click to view a user's tweets</h1>
 			<% @users.each do |user| %>
-				<div id='<%= user.id %>' onclick='ajax(<%= user.id %>)'>
-					<img src='<%= user.profile_image_url %>'>
-					<span><%= user.name %></span>
+				<div id="<%= user['id'] %>">
+					<img src="<%= user['profile_image_url'] %>">
+					<a onclick="ajax(<%= user['id'] %>)"><%= user['name'] %></a>
 					<table class='table table-striped'></table>
 				</div>
 			<% end %>
-		</div>
 	</div>
 	<div class="col-md-2">
 		<h1>SPACE</h1>
@@ -23,17 +21,17 @@
 <script type="text/javascript">
 	var MONTH = {0: 'Jan', 1: 'Feb', 2: 'Mar', 3: 'Apr', 4: 'May', 5: 'Jun', 
 					6: 'Jul', 7: 'Aug', 8: 'Sep', 9: 'Oct', 10: 'Nov', 11: 'Dec'};
-	function ajax(id) {
+	function ajax(twitter_id_str) {
 		$.ajax({
-			url: '/users/' + id,
+			url: '/users/' + twitter_id_str,
 			type: 'GET',
 			dataType: 'json',
 			success: function (response) {
-				if (response.length == 0) $("#" + id + " > table").append("<tr><td>No Hay Tweet</td></tr>");
+				if (response.length == 0) $("#" + twitter_id_str + " > table").append("<tr><td>No Hay Tweet</td></tr>");
 				_.each(response, function (tweet) {
 					var tweet_date = new Date(Date.parse(tweet['created_at']));
 					var display_time = MONTH[tweet_date.getMonth()] + " " + tweet_date.getDate();
-					$("#" + id + " > table").append(tweet_template(tweet, display_time));
+					$("#" + twitter_id_str + " > table").append(tweet_template(tweet, display_time));
 				})
 			},
 			error: function (response) {
@@ -42,7 +40,7 @@
 		})
 	}
 	$( function () {
-		$('#header_links').append("<a href='<%= edit_group_url %>'>Edit This Group</a>");
+		// $('#header_links').append("<a href='<%= edit_group_url %>'>Edit This Group</a>");
 	})
 </script>
 

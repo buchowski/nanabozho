@@ -1,30 +1,28 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- *= require jquery.ui.accordion
- */
-/* body {
- 	width: 80%;
- 	padding-left: 10%;
- }*/
+*= require_self
+*= require_tree .
+*= require jquery.ui.accordion
+*/
+
+#group_description {
+ 	height: 100px;
+ }
  .userbox {
  	float: left;
  	padding-right: 10px;
  	padding-bottom: 20px;
  }
+ .userbox img {
+    height: 48px;
+    width: 48px;
+ }
  .groupbox {
   	clear: both;
+    height: 100px;
+    overflow: hidden;
+    margin-bottom: 15px;
  }
- .groupbox h3 {
+ .groupbox h4 {
  	margin-top: 5px;
  }
  .content {
@@ -105,9 +103,11 @@
  	width: 48px;
  	height: 48px;
  }
- #selected_users {
+ #current_members {
  	/*width: 50%;*/
- 	float: right;
+/* 	float: right;
+*/ 	overflow: scroll;
+	height: 240px;
  }
  #searched_users {
  	clear: both;
@@ -177,8 +177,8 @@
  #help_text ul {
  	padding: 10px 40px;
  }
-.clearfix { display: inline-block; }
-/* start commented backslash hack \*/
+/*.clearfix { display: inline-block; }*/
+ /*start commented backslash hack \*/
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
-/* close commented backslash hack */
+/* close commented backslash hack 
