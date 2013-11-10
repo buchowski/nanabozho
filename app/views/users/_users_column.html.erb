@@ -1,0 +1,7 @@
+<% @users.each do |user| %>
+	<div class="user" id="<%= user['id'] %>">
+		<img src="<%= user['profile_image_url'] %>">
+		<a name="<%= user['id'] %>"><%= user['name'] %></a>
+		<table class='table table-striped'></table>
+	</div>
+<% end %>

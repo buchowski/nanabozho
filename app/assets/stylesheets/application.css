@@ -7,6 +7,13 @@
 #group_description {
  	height: 100px;
  }
+ .user img {
+    height: 96px;
+    width: 96px;
+    /*float: left;*/
+/*    padding-right: 10px;
+    padding-bottom: 20px;
+*/ }
  .userbox {
  	float: left;
  	padding-right: 10px;
@@ -48,30 +55,13 @@
  .group_link:hover {
  	text-decoration: underline;
  }
- /*.group_link:visited {
- 	/*color: #CCCC99;*/
- }*/
  .group_name {
  	font-size: 4em;
  }
- /*.group_label {
- 	color: #CCCC99;
- 	vertical-align: top;
- }*/
-/* .group_index {
- 	margin-bottom: 10px;
- 	padding-left: 20px;
- 	cursor: pointer;
- }*/
- .group_index:hover {
+.group_index:hover {
  	background: #CCCC99;
  }
-/* .index_thumb {
- 	padding: 5px;
- 	width: 24px;
- 	height: 24px;
- }
-*/ .index_thumb:hover {
+.index_thumb:hover {
  	background-color: #CCCC99;
  	cursor: pointer;
  }
@@ -89,37 +79,30 @@
  #group_form_labels {
  	float: left;
  }
- .group_form {
+/* .group_form {
  	height: auto;
-/* 	padding: 20px;
- 	margin: 10px;
-*/ 	border: 2px solid #CCCC99;
+	border: 2px solid #CCCC99;
  	border-bottom-right-radius: 20px 20px;
  	border-bottom-left-radius: 20px 20px;
  	border-top-right-radius: 20px 20px;
  	border-top-left-radius: 20px 20px;
  }
- .group_form img {
+*/ .group_form img {
  	width: 48px;
  	height: 48px;
  }
  #current_members {
- 	/*width: 50%;*/
-/* 	float: right;
-*/ 	overflow: scroll;
+	overflow: scroll;
 	height: 240px;
  }
  #searched_users {
  	clear: both;
- 	/*width: 50%;*/
  	float: left;
  }
 #searched_users_label_div {
-	/*width: 50%;*/
  	float: left;
 }
 #selected_users_label_div {
-	/*width: 50%;*/
  	float: right;
 }
 .username {
