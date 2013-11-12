@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="col-md-2">
-		<h1>SPACE</h1>
+		<h1>Log In</h1>
 		<%= render 'login_form' %>
 	</div>
 </div>
@@ -57,6 +57,12 @@
 		$(".user > a").on("click", function () {
 			ajax($(this).attr("name"));
 		})
+	})
+</script>
+<script type="text/javascript">
+	$(function () {
+		$("ul.nav").append("<li class='active'><a href='<%= edit_group_url %>'>Edit This Group</a></li>")
+		// $("ul.nav").append("King Kong");
 	})
 </script>
 
